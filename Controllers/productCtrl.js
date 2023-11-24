@@ -44,8 +44,40 @@ const fetchProductCtrl = expressAsyncHandler(async(req, res)=>{
     }
 });
 
+//Update Product
+const updateProductCtrl = expressAsyncHandler(async(req, res)=>{
+    const {id} = req.params;
+    validateMongoId(id);
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, {
+            product_name: req?.body?.product_name,
+            price: req?.body?.price,
+            description: req?.body?.description,
+            image: req?.body?.image,
+            isActive: req?.body?.isActive,
+        }, {new: true})
+        res.json(updatedProduct);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+//Delete Product
+const deleteProductCtrl = expressAsyncHandler(async(req, res)=>{
+    const {id} = req.params;
+    validateMongoId(id);
+    try {
+        const deletedProduct = await Product.findByIdAndDelete(id);
+        res.json(deletedProduct);
+    } catch (error) {
+        res.json(error);
+    }
+})
+
 module.exports = {
     createProductCtrl, 
     fetchAllProductsCtrl,
     fetchProductCtrl,
+    updateProductCtrl,
+    deleteProductCtrl,
 };
