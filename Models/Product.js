@@ -9,11 +9,11 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Product Price is required"],
     },
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, "Owner is required"],
-    },
+    // owner: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: [true, "Owner is required"],
+    // },
     description: {
         type: String,
     },
@@ -38,4 +38,4 @@ const productSchema = new mongoose.Schema({
 
 //Compile mongoose schema into model
 const Product = mongoose.model('Product', productSchema);
-module.exports = Product;
+module.exports = Product; 
